@@ -34,7 +34,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6 mb-4">
+        <div class="col-md-4 mb-4">
             <div class="card-modern text-center p-4">
                 <div class="display-4 text-primary"><i class="fas fa-book"></i></div>
                 <h4 class="mt-3">Gestionar Materias</h4>
@@ -42,12 +42,20 @@
                 <a href="/docente/materias" class="btn btn-success btn-action">Ir a Materias <i class="fas fa-arrow-right ms-2"></i></a>
             </div>
         </div>
-        <div class="col-md-6 mb-4">
+        <div class="col-md-4 mb-4">
             <div class="card-modern text-center p-4">
                 <div class="display-4 text-warning"><i class="fas fa-pen-fancy"></i></div>
                 <h4 class="mt-3">Registrar Notas</h4>
                 <p>Asignar calificaciones a tus alumnos</p>
                 <a href="/docente/notas" class="btn btn-warning btn-action">Ir a Notas <i class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card-modern text-center p-4">
+                <div class="display-4 text-info"><i class="fas fa-comments"></i></div>
+                <h4 class="mt-3">Ver Comentarios</h4>
+                <p>Responder a los comentarios de los alumnos</p>
+                <a href="/docente/comentarios" class="btn btn-info btn-action">Ir a Comentarios <i class="fas fa-arrow-right ms-2"></i></a>
             </div>
         </div>
     </div>
@@ -63,7 +71,11 @@
             </div>
             <table class="table table-modern" th:unless="${ultimasAcciones.isEmpty()}">
                 <thead class="table-light">
-                <tr><th>Fecha</th><th>Acción</th><th>Detalles</th></tr>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Acción</th>
+                    <th>Detalles</th>
+                </tr>
                 </thead>
                 <tbody>
                 <tr th:each="accion : ${ultimasAcciones}">
