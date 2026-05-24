@@ -31,6 +31,14 @@ public class NotaService {
         return notaRepository.findByAlumnoAndMateriaAndCorte(alumno, materia, corte);
     }
 
+    public List<Nota> buscarPorMaterias(List<Materia> materias) {
+        return notaRepository.findByMateriaIn(materias);
+    }
+
+    public Optional<Nota> buscarPorId(Long id) {
+        return notaRepository.findById(id);
+    }
+
     public void eliminar(Long id) {
         notaRepository.deleteById(id);
     }

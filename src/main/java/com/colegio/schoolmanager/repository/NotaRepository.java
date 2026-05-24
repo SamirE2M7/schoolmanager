@@ -11,4 +11,7 @@ public interface NotaRepository extends JpaRepository<Nota, Long> {
     List<Nota> findByAlumno(Usuario alumno);
     List<Nota> findByMateria(Materia materia);
     Optional<Nota> findByAlumnoAndMateriaAndCorte(Usuario alumno, Materia materia, String corte);
+
+    // Nuevo método para buscar notas por lista de materias
+    List<Nota> findByMateriaIn(List<Materia> materias);
 }

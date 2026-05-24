@@ -93,4 +93,48 @@ public class NotaController {
         }
         return List.of();
     }
+
+    // Listar todas las notas del docente
+    @GetMapping("/lista")
+    public String listarNotas(Authentication auth, Model model) {
+        String email = auth.getName();
+        Usuario docente = usuarioService.buscarPorEmail(email).orElse(null);
+
+        List<Materia> materias = materiaService.buscarPorDocente(docente);
+        List<Nota> notas = notaService.buscarPorMaterias(materias);
+
+        model.addAttribute("notas", notas);
+        return "docente/lista_notas";
+    }
+
+    // Eliminar nota
+    @GetMapping("/eliminar/{id}")
+    public String eliminarNota(@PathVariable Long id) {
+        notaService.eliminar(id);
+        return "redirect:/docente/notas/lista";
+    }
+
+    // Mostrar formulario de edición de nota
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
+        Nota nota = notaService.buscarPorId(id).orElse(null);
+        model.addAttribute("nota", nota);
+        model.addAttribute("cortes", new String[]{"Primer Corte", "Segundo Corte", "Tercer Corte", "Final"});
+        return "docente/editar_nota";
+    }
+
+    // Actualizar nota (POST)
+    @PostMapping("/actualizar/{id}")
+    public String actualizarNota(@PathVariable Long id,
+                                 @RequestParam Double notaValor,
+                                 @RequestParam String corte) {
+        Nota nota = notaService.buscarPorId(id).orElse(null);
+        if (nota != null) {
+            nota.setNota(notaValor);
+            nota.setCorte(corte);
+            notaService.guardar(nota);
+        }
+        return "redirect:/docente/notas/lista";
+    }
+
 }
